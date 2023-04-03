@@ -48,13 +48,7 @@
                                             <td><?= $r['no_surat']; ?></td>
                                             <td><?= $r['sifat_surat']; ?></td>
                                             <td><?= $r['perihal']; ?></td>
-                                            <td>
-                                                <?php if ($r['tujuan'] == 'all') {
-                                                    echo 'Semua Pokja';
-                                                } else {
-                                                    echo $r['tujuan'];
-                                                } ?>
-                                            </td>
+                                            <td><?= $r['tujuan']; ?></td>
                                             <td><?= format_tanggal($r['created_at']); ?></td>
                                             <td>
                                                 <center>
