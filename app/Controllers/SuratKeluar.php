@@ -353,23 +353,35 @@ class SuratKeluar extends BaseController
     {
         //fetch ttd
         $idd = session()->get('id_desa');
-        $q = $this->penandatanganModel->join('mod_surat_keluar', 'mod_surat_keluar.penandatangan = mod_penandatangan.id', 'left')->where('mod_surat_keluar.id =', $id)->where('mod_surat_keluar.id_desa =', $idd)->first();
-        $penandatangan = $q['nama'];
-        $jabatan = $q['jabatan'];
-        $scan_ttd = $q['ttd'];
-        if ($scan_ttd = "") {
-            $scan_ttd = "";
+        $fetch_ttd = $this->penandatanganModel->findAll();
+        if ($fetch_ttd != null) {
+            $q = $this->penandatanganModel->join('mod_surat_keluar', 'mod_surat_keluar.penandatangan = mod_penandatangan.id', 'left')->where('mod_surat_keluar.id =', $id)->where('mod_surat_keluar.id_desa =', $idd)->first();
+            $penandatangan = $q['nama'];
+            $jabatan = $q['jabatan'];
+            $scan_ttd = $q['ttd'];
+            if ($scan_ttd = "") {
+                $scan_ttd = "";
+            } else {
+                $scan_ttd = '<img src="' . ROOTPATH . 'public/media/ttd/' . $q['ttd'] . '" width="50" height="50"><br><small style="color:#aaa;">Ditandatangani secara elektronik</small>';
+            }
         } else {
-            $scan_ttd = '<img src="' . ROOTPATH . 'public/media/ttd/' . $q['ttd'] . '" width="50" height="50"><br><small style="color:#aaa;">Ditandatangani secara elektronik</small>';
+            session()->setFlashdata('err', 'Data penandatangan tidak ditemukan.');
+            return redirect()->to(base_url('surat-keluar'));
         }
         //fetch header
-        $setting = $this->settingModel->findAll();
-        foreach ($setting as $s) :
-            $desa = $s['nama_desa'];
-            $kecamatan = $s['nama_kecamatan'];
-            $alamat = $s['alamat'];
-            $kodepos = $s['kode_pos'];
-        endforeach;
+        $fetch_header = $this->settingModel->findAll();
+        if ($fetch_header != null) {
+            $setting = $this->settingModel->findAll();
+            foreach ($setting as $s) :
+                $desa = $s['nama_desa'];
+                $kecamatan = $s['nama_kecamatan'];
+                $alamat = $s['alamat'];
+                $kodepos = $s['kode_pos'];
+            endforeach;
+        } else {
+            session()->setFlashdata('err', 'Data KOP surat tidak ditemukan.');
+            return redirect()->to(base_url('surat-keluar'));
+        }
         //fetch surat
         $idd = session()->get('id_desa');
         $q = $this->suratkeluarModel->where('id =', $id)->where('id_desa', $idd)->first();
@@ -379,7 +391,11 @@ class SuratKeluar extends BaseController
         $satuan = $q['satuan'];
         $perihal = $q['perihal'];
         $isi = $q['isi'];
-        $tujuan = $q['tujuan'];
+        if ($q['tujuan'] == 'all') {
+            $tujuan =  'Pokja I/Anggota<br>Pokja II/Anggota<br>Pokja III/Anggota<br>Pokja IV/Anggota';
+        } else {
+            $tujuan = $q['tujuan'];
+        }
         $tgl = $q['created_at'];
 
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -462,7 +478,7 @@ class SuratKeluar extends BaseController
         </tr>
         <tr>
         <td width="20%" align="right">&nbsp;</td>
-        <td width="80%" colspan="2" valign="top"><font size="-1">Ketua ' . $tujuan . '</font></td>
+        <td width="80%" colspan="2" valign="top"><font size="-1">' . $tujuan . '</font></td>
         </tr>
         <tr>
         <td>&nbsp;</td>

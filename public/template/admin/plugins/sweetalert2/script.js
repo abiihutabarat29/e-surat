@@ -37,4 +37,17 @@ if (swalFlash) {
         title: swalFlash
     })
 }
+const swalFlashErr = $(".swalErr").data("swal");
+if (swalFlashErr) {
+    var Toast =  Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    Toast.fire({
+        icon: 'warning',
+        title: swalFlashErr
+    })
+}
 
