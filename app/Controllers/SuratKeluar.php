@@ -138,6 +138,12 @@ class SuratKeluar extends BaseController
                 'errors' => [
                     'required' => 'Tujuan harus diisi.',
                 ]
+            ],
+            'tglsurat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tanggal Surat harus diisi.',
+                ]
             ]
         ])) {
             return redirect()->to('/tambah-surat-keluar')->withInput();
@@ -161,6 +167,7 @@ class SuratKeluar extends BaseController
             'jlh_lampiran'   => $this->request->getPost('jlhlampiran'),
             'satuan'         => $this->request->getPost('satuan'),
             'tujuan'         => $this->request->getPost('tujuan'),
+            'tgl_surat'         => $this->request->getPost('tglsurat'),
             'file_lampiran'  => $fileNamelampiran,
             'pokja'          => session()->get('pokja'),
         ];
@@ -261,6 +268,12 @@ class SuratKeluar extends BaseController
                 'errors' => [
                     'required' => 'Tujuan harus diisi.',
                 ]
+            ],
+            'tglsurat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tanggal Surat harus diisi.',
+                ]
             ]
         ])) {
             return redirect()->to(base_url('surat-keluar/edit/' . $this->request->getPost('id')))->withInput();
@@ -294,6 +307,7 @@ class SuratKeluar extends BaseController
             'jlh_lampiran'   => $this->request->getPost('jlhlampiran'),
             'satuan'         => $this->request->getPost('satuan'),
             'tujuan'         => $this->request->getPost('tujuan'),
+            'tgl_surat'         => $this->request->getPost('tglsurat'),
             'file_lampiran'  => $fileNamelampiran,
         ];
         $this->suratkeluarModel->save($data);
@@ -396,7 +410,7 @@ class SuratKeluar extends BaseController
         } else {
             $tujuan = $q['tujuan'];
         }
-        $tgl = $q['created_at'];
+        $tgl = $q['tgl_surat'];
 
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         //initialize document
@@ -598,7 +612,7 @@ class SuratKeluar extends BaseController
         } else {
             $tujuan = $q['tujuan'];
         }
-        $tgl = $q['created_at'];
+        $tgl = $q['tgl_surat'];
 
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         //initialize document

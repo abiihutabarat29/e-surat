@@ -151,22 +151,33 @@
                                             <a class="btn btn-primary mt-2" onclick="stepper.next()">Next</a>
                                         </div>
                                         <div id="tujuan" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Tujuan<span class="text-danger">*</span></label>
-                                                    <select name="tujuan" class="form-control <?= ($validation->hasError('tujuan')) ? 'is-invalid' : ''; ?>">
-                                                        <option selected disabled><?= (old('tujuan')) ? old('tujuan') : ".::Pilih Tujuan::." ?></option>
-                                                        <option value="Semua Pokja">Semua Pokja</option>
-                                                        <option value="Pokja I/Anggota">Pokja I/Anggota</option>
-                                                        <option value="Pokja II/Anggota">Pokja II/Anggota</option>
-                                                        <option value="Pokja III/Anggota">Pokja III/Anggota</option>
-                                                        <option value="Pokja IV/Anggota">Pokja IV/Anggota</option>
-                                                    </select>
-                                                    <span class="error invalid-feedback"> <?= $validation->getError('tujuan'); ?></span>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Tujuan<span class="text-danger">*</span></label>
+                                                            <select name="tujuan" class="form-control <?= ($validation->hasError('tujuan')) ? 'is-invalid' : ''; ?>">
+                                                                <option selected disabled><?= (old('tujuan')) ? old('tujuan') : ".::Pilih Tujuan::." ?></option>
+                                                                <option value="Semua Pokja">Semua Pokja</option>
+                                                                <option value="Pokja I/Anggota">Pokja I/Anggota</option>
+                                                                <option value="Pokja II/Anggota">Pokja II/Anggota</option>
+                                                                <option value="Pokja III/Anggota">Pokja III/Anggota</option>
+                                                                <option value="Pokja IV/Anggota">Pokja IV/Anggota</option>
+                                                            </select>
+                                                            <span class="error invalid-feedback"> <?= $validation->getError('tujuan'); ?></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Tanggal Surat<span class="text-danger">*</span></label>
+                                                            <input name="tglsurat" type="date" class="form-control <?= ($validation->hasError('tglsurat')) ? 'is-invalid' : ''; ?>" autocomplete="off" value="<?= old('tglsurat'); ?>">
+                                                            <span class="error invalid-feedback"> <?= $validation->getError('tglsurat'); ?></span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <a class="btn btn-primary" onclick="stepper.previous()">Previous</a>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
                                             </div>
+                                            <a class="btn btn-primary" onclick="stepper.previous()">Previous</a>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
                                         </div>
                                     </div>
                                 </div>
