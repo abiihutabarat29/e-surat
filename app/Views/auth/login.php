@@ -51,6 +51,12 @@
               </form>
             </div>
           </div>
+          <footer class="main-footer mt-2" style="display: flex; align-items: center; justify-content: center;">
+            <small>
+              <span style="margin-right: 10px;">Copyright &copy;<?= date('Y') ?> <a href="https://diskominfo.batubarakab.go.id" target="blank">Dinas Komunikasi dan
+                  Informatika Kab. Batu Bara</a> All rights reserved.</span>
+            </small>
+          </footer>
         </div>
       </div>
     </div>
