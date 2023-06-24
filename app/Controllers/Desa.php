@@ -37,11 +37,11 @@ class Desa extends BaseController
         //Validasi input
         if (!$this->validate([
             'kode' => [
-                'rules' => 'required|numeric|max_length[4]|is_unique[mod_desa.kode]',
+                'rules' => 'required|numeric|max_length[10]|is_unique[mod_desa.kode]',
                 'errors' => [
                     'required' => 'Kode tidak boleh kosong.',
                     'numeric' => 'Kode harus angka.',
-                    'max_length' => 'Kode maksimal 4 digit.',
+                    'max_length' => 'Kode maksimal 10 digit.',
                     'is_unique' => 'Kode sudah ada.'
 
                 ]
@@ -85,9 +85,9 @@ class Desa extends BaseController
     {
         $kodeLama = $this->desaModel->where(['id' => $id])->first();
         if ($kodeLama['kode'] == $this->request->getPost('kode')) {
-            $rule_kode = 'required|numeric|max_length[4]';
+            $rule_kode = 'required|numeric|max_length[10]';
         } else {
-            $rule_kode = 'required|numeric|max_length[4]|is_unique[mod_desa.kode]';
+            $rule_kode = 'required|numeric|max_length[10]|is_unique[mod_desa.kode]';
         }
         //Validasi input
         if (!$this->validate([
@@ -96,7 +96,7 @@ class Desa extends BaseController
                 'errors' => [
                     'required' => 'Kode tidak boleh kosong.',
                     'numeric' => 'Kode harus angka.',
-                    'max_length' => 'Kode maksimal 4 digit.',
+                    'max_length' => 'Kode maksimal 10 digit.',
                     'is_unique' => 'Kode sudah ada.'
 
                 ]

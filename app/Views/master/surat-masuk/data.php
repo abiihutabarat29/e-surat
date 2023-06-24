@@ -74,7 +74,7 @@
                                                             <?php if (session()->get('level') == '2' && $r['pokja'] == (session()->get('pokja'))) { ?>
                                                                 <a class="dropdown-item" href="<?= base_url('surat-masuk/edit/' . $r['id']) ?>">Edit</a>
                                                             <?php } ?>
-                                                            <?php if (session()->get('level') == '2' || session()->get('level') == '1') { ?>
+                                                            <?php if (session()->get('level') == '2' || session()->get('level') == '1' || session()->get('level') == '4') { ?>
                                                                 <a class="dropdown-item" href="#" data-toggle='modal' data-target='#activateModalDeleteSm<?= $r['id'] ?>'>Delete</a>
                                                             <?php } ?>
                                                         </div>

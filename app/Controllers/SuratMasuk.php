@@ -157,8 +157,13 @@ class SuratMasuk extends BaseController
             }
         }
         $this->suratmasukModel->delete($id);
-        session()->setFlashdata('m', 'Data berhasil dihapus');
-        return redirect()->to(base_url('surat-masuk'));
+        if (session()->get('level') == 4) {
+            session()->setFlashdata('m', 'Data berhasil dihapus');
+            return redirect()->to(base_url('surat-masuk-kabupaten'));
+        } else {
+            session()->setFlashdata('m', 'Data berhasil dihapus');
+            return redirect()->to(base_url('surat-masuk'));
+        }
     }
 
     public function edit($id)

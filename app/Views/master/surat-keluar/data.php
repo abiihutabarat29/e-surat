@@ -60,6 +60,7 @@
                                                             <?php if (session()->get('level') == '4') { ?>
                                                                 <a class="dropdown-item" href="<?= base_url('surat-keluar/detail/' . $r['id']) ?>">Detail</a>
                                                                 <a class="dropdown-item" href="<?= base_url('surat-keluar-kabupaten/print/' . $r['id']) ?>" target="_blank">Print</a>
+                                                                <a class="dropdown-item" href="#" data-toggle='modal' data-target='#activateModalDeleteSk<?= $r['id'] ?>'>Delete</a>
                                                             <?php } else { ?>
                                                                 <a class="dropdown-item" href="<?= base_url('surat-keluar/detail/' . $r['id']) ?>">Detail</a>
                                                                 <a class="dropdown-item" href="<?= base_url('surat-keluar/print/' . $r['id']) ?>" target="_blank">Print</a>

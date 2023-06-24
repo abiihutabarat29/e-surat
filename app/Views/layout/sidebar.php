@@ -93,7 +93,7 @@
                                 <li class="nav-item">
                                     <a href="<?= base_url('user') ?>" class="nav-link <?= ($request->uri->getSegment(1) == 'user') ? 'active' : ""; ?>">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>User Kabupaten</p>
+                                        <p>User PKK Kabupaten</p>
                                     </a>
                                 </li>
                             </ul>
@@ -103,7 +103,7 @@
                                 <li class="nav-item">
                                     <a href="<?= base_url('data-user') ?>" class="nav-link <?= ($request->uri->getSegment(1) == 'data-user') ? 'active' : ""; ?>">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>User PKK</p>
+                                        <p>User PKK Desa</p>
                                     </a>
                                 </li>
                             </ul>

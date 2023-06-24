@@ -3,18 +3,21 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\DesaModel;
 use App\Models\SuratMasukModel;
 use App\Models\SuratKeluarModel;
 
 class Home extends BaseController
 {
     protected $userModel;
+    protected $desaModel;
     protected $suratmasukModel;
     protected $suratkeluarModel;
 
     public function __construct()
     {
         $this->userModel = new UserModel();
+        $this->desaModel = new DesaModel();
         $this->suratmasukModel = new SuratMasukModel();
         $this->suratkeluarModel = new SuratKeluarModel();
     }
@@ -41,6 +44,11 @@ class Home extends BaseController
             } else {
                 $user = $this->userModel->where('level !=', 1)->where('id_desa', $idd)->countAllResults();
             }
+            if (session()->get('id_desa') == 0) {
+                $namaInstansi = 'Kabupaten Batu Bara';
+            } else {
+                $namaInstansi = $this->desaModel->getNamaDesaById($idd);
+            }
             $data = array(
                 'title'         => 'Dashboard',
                 'appname'       => 'Aplikasi Management Surat',
@@ -51,6 +59,7 @@ class Home extends BaseController
                 'pokjaIII'      => $this->suratmasukModel->where('pokja =', 'Pokja III')->where('id_desa', $idd)->countAllResults(),
                 'pokjaIV'       => $this->suratmasukModel->where('pokja =', 'Pokja IV')->where('id_desa', $idd)->countAllResults(),
                 'isi'           => 'home',
+                'namaInstansi'      => $namaInstansi
             );
             return view('layout/wrapper', $data);
         }

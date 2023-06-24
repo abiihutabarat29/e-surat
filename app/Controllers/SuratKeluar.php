@@ -191,9 +191,12 @@ class SuratKeluar extends BaseController
             }
         }
         $this->suratkeluarModel->delete($id);
-        if (session()->get('level') == 1) {
+        if (session()->get('level') == 1 or session()->get('level') == 2) {
             session()->setFlashdata('m', 'Data berhasil dihapus');
             return redirect()->to(base_url('data-surat-keluar'));
+        } elseif (session()->get('level') == 4) {
+            session()->setFlashdata('m', 'Data berhasil dihapus');
+            return redirect()->to(base_url('surat-keluar-kabupaten'));
         } else {
             session()->setFlashdata('m', 'Data berhasil dihapus');
             return redirect()->to(base_url('surat-keluar'));

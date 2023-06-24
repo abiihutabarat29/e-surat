@@ -5,13 +5,13 @@
                 <div class="col-sm-6">
                     <h1 class="m-0">Dashboard
                         <?php if (session()->get('level') == '1') {
-                            echo "Administrator";
+                            echo "Administrator Desa" . " " . $namaInstansi;
                         } elseif (session()->get('level') == '2') {
-                            echo "Sekretaris";
+                            echo "Sekretaris PKK" . " " . $namaInstansi;
                         } elseif (session()->get('level') == '4') {
-                            echo "Superadmin";
+                            echo "Administrator Kabupaten";
                         } elseif (session()->get('level') == '3') { ?>
-                            <?= session()->get('pokja'); ?>
+                            <?= session()->get('pokja'); ?> <?= $namaInstansi ?>
                         <?php } ?>
                     </h1>
                     <h6><?= $appname; ?></h6>

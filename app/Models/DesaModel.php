@@ -10,4 +10,9 @@ class DesaModel extends Model
     protected $primaryKey = 'id';
     protected $useTimestamps = true;
     protected $allowedFields = ['kode', 'nama_desa'];
+
+    public function getNamaDesaById($id)
+    {
+        return $this->select('nama_desa')->where('id', $id)->get()->getRow()->nama_desa;
+    }
 }
