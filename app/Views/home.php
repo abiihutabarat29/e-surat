@@ -119,6 +119,104 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="small-box bg-secondary">
+                        <div class="inner">
+                            <h3><?= $penandatangan ?></h3>
+                            <p>Penandatangan</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ionicons ion-ios-people"></i>
+                        </div>
+                        <?php if (session()->get('level') == '1') { ?>
+                            <a href="<?= base_url('penandatangan') ?>" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+                        <?php } else { ?>
+                            <a href="#" class="small-box-footer">Penandatangan</a>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="small-box bg-fuchsia">
+                        <div class="inner">
+                            <h3><?= $sekretariatsk ?></h3>
+                            <p>Sekretariat</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-envelope-open"></i>
+                        </div>
+                        <?php if (session()->get('level') == '1') { ?>
+                            <a href="<?= base_url('surat-keluar') ?>" class="small-box-footer">Selengkapnya<i class="fas fa-arrow-circle-right"></i></a>
+                        <?php } else { ?>
+                            <a href="#" class="small-box-footer">Surat Keluar</a>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3><?= $pokjaIsk ?></h3>
+                            <p>POKJA I</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-envelope-open"></i>
+                        </div>
+                        <?php if (session()->get('level') == '1') { ?>
+                            <a href="<?= base_url('surat-keluar') ?>" class="small-box-footer">Selengkapnya<i class="fas fa-arrow-circle-right"></i></a>
+                        <?php } else { ?>
+                            <a href="#" class="small-box-footer">Surat Keluar</a>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3><?= $pokjaIIsk ?></h3>
+                            <p>POKJA II</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-envelope-open"></i>
+                        </div>
+                        <?php if (session()->get('level') == '1') { ?>
+                            <a href="<?= base_url('surat-keluar') ?>" class="small-box-footer">Selengkapnya<i class="fas fa-arrow-circle-right"></i></a>
+                        <?php } else { ?>
+                            <a href="#" class="small-box-footer">Surat Keluar</a>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="small-box bg-orange">
+                        <div class="inner">
+                            <h3><?= $pokjaIIIsk ?></h3>
+                            <p>POKJA III</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-envelope-open"></i>
+                        </div>
+                        <?php if (session()->get('level') == '1') { ?>
+                            <a href="<?= base_url('surat-keluar') ?>" class="small-box-footer">Selengkapnya<i class="fas fa-arrow-circle-right"></i></a>
+                        <?php } else { ?>
+                            <a href="#" class="small-box-footer">Surat Keluar</a>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="small-box bg-purple">
+                        <div class="inner">
+                            <h3><?= $pokjaIVsk ?></h3>
+                            <p>POKJA IV</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-envelope-open"></i>
+                        </div>
+                        <?php if (session()->get('level') == '1') { ?>
+                            <a href="<?= base_url('surat-keluar') ?>" class="small-box-footer">Selengkapnya<i class="fas fa-arrow-circle-right"></i></a>
+                        <?php } else { ?>
+                            <a href="#" class="small-box-footer">Surat Keluar</a>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </div>

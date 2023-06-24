@@ -62,7 +62,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <h4>
-                                                <i class="fas fa-user"></i> Profil Desa
+                                                <i class="fas fa-user"></i> Profil Instansi
                                                 <a href="<?= base_url('setting-profil/edit/' . $settings['id']) ?>" class="btn btn-info btn-xs float-right">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
@@ -87,7 +87,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <h4>
-                                                <i class="fas fa-home"></i> Profil Desa
+                                                <i class="fas fa-home"></i> Profil Instansi
                                                 <a href="<?= base_url('setting-profil/add') ?>" class="btn btn-warning btn-xs float-right">
                                                     <i class="fa fa-plus"></i>
                                                 </a>
@@ -97,7 +97,7 @@
                                     <div class="card-body">
                                         <table>
                                             <h6>
-                                                <center><i>Profil Desa belum disetting . . .</i></center>
+                                                <center><i>Profil belum disetting . . .</i></center>
                                             </h6>
                                         </table>
                                     </div>

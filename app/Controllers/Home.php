@@ -6,6 +6,7 @@ use App\Models\UserModel;
 use App\Models\DesaModel;
 use App\Models\SuratMasukModel;
 use App\Models\SuratKeluarModel;
+use App\Models\PenandatanganModel;
 
 class Home extends BaseController
 {
@@ -13,6 +14,7 @@ class Home extends BaseController
     protected $desaModel;
     protected $suratmasukModel;
     protected $suratkeluarModel;
+    protected $penandatanganModel;
 
     public function __construct()
     {
@@ -20,6 +22,7 @@ class Home extends BaseController
         $this->desaModel = new DesaModel();
         $this->suratmasukModel = new SuratMasukModel();
         $this->suratkeluarModel = new SuratKeluarModel();
+        $this->penandatanganModel = new PenandatanganModel();
     }
     public function index()
     {
@@ -58,6 +61,12 @@ class Home extends BaseController
                 'pokjaII'       => $this->suratmasukModel->where('pokja =', 'Pokja II')->where('id_desa', $idd)->countAllResults(),
                 'pokjaIII'      => $this->suratmasukModel->where('pokja =', 'Pokja III')->where('id_desa', $idd)->countAllResults(),
                 'pokjaIV'       => $this->suratmasukModel->where('pokja =', 'Pokja IV')->where('id_desa', $idd)->countAllResults(),
+                'penandatangan'       => $this->penandatanganModel->where('id_desa', $idd)->countAllResults(),
+                'sekretariatsk'   => $this->suratkeluarModel->where('pokja =', null)->where('id_desa', $idd)->countAllResults(),
+                'pokjaIsk'        => $this->suratkeluarModel->where('pokja =', 'Pokja I')->where('id_desa', $idd)->countAllResults(),
+                'pokjaIIsk'       => $this->suratkeluarModel->where('pokja =', 'Pokja II')->where('id_desa', $idd)->countAllResults(),
+                'pokjaIIIsk'      => $this->suratkeluarModel->where('pokja =', 'Pokja III')->where('id_desa', $idd)->countAllResults(),
+                'pokjaIVsk'       => $this->suratkeluarModel->where('pokja =', 'Pokja IV')->where('id_desa', $idd)->countAllResults(),
                 'isi'           => 'home',
                 'namaInstansi'      => $namaInstansi
             );
