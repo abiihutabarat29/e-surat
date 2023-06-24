@@ -124,7 +124,7 @@
                                     <div class="card-body">
                                         <table>
                                             <h6>
-                                                <center><i>Profil Desa belum disetting . . .</i></center>
+                                                <center><i>Profil belum disetting . . .</i></center>
                                             </h6>
                                         </table>
                                     </div>

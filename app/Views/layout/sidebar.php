@@ -103,7 +103,7 @@
                                 <li class="nav-item">
                                     <a href="<?= base_url('data-user') ?>" class="nav-link <?= ($request->uri->getSegment(1) == 'data-user') ? 'active' : ""; ?>">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>User Desa</p>
+                                        <p>User PKK</p>
                                     </a>
                                 </li>
                             </ul>
