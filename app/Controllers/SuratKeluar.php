@@ -369,6 +369,7 @@ class SuratKeluar extends BaseController
     public function print($id)
     {
         //fetch ttd
+        //<br><small style="color:#aaa;">Ditandatangani secara elektronik</small>';
         $idd = session()->get('id_desa');
         $fetch_ttd = $this->penandatanganModel->findAll();
         if ($fetch_ttd != null) {
@@ -379,7 +380,7 @@ class SuratKeluar extends BaseController
             if ($scan_ttd = "") {
                 $scan_ttd = "";
             } else {
-                $scan_ttd = '<img src="' . ROOTPATH . 'public/media/ttd/' . $q['ttd'] . '" width="50" height="50"><br><small style="color:#aaa;">Ditandatangani secara elektronik</small>';
+                $scan_ttd = '<img src="' . ROOTPATH . 'public/media/ttd/' . $q['ttd'] . '" width="50" height="50">';
             }
         } else {
             session()->setFlashdata('err', 'Data penandatangan tidak ditemukan.');
@@ -582,7 +583,7 @@ class SuratKeluar extends BaseController
             if ($scan_ttd = "") {
                 $scan_ttd = "";
             } else {
-                $scan_ttd = '<img src="' . ROOTPATH . 'public/media/ttd/' . $q['ttd'] . '" width="50" height="50"><br><small style="color:#aaa;">Ditandatangani secara elektronik</small>';
+                $scan_ttd = '<img src="' . ROOTPATH . 'public/media/ttd/' . $q['ttd'] . '" width="50" height="50">';
             }
         } else {
             session()->setFlashdata('err', 'Data penandatangan tidak ditemukan.');

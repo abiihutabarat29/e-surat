@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\laporanModel;
 use App\Models\UserModel;
 use CodeIgniter\Config\Config;
+use TCPDF;
 
 class Laporan extends BaseController
 {
@@ -238,16 +239,95 @@ class Laporan extends BaseController
         // dd($detail);
         return view('layout/wrapper', $data);
     }
-    public function details($id)
+    // public function details($id)
+    // {
+    //     $idd = session()->get('id_desa');
+    //     $detail = $this->userModel->join('mod_laporan', 'mod_laporan.id_user = mod_user.id', 'left')->where('mod_laporan.id =', $id)->where('mod_laporan.id_desa =', $idd)->first();
+    //     $data = array(
+    //         'title' => 'Detail Laporan Kegiatan',
+    //         'data' => $detail,
+    //         'isi' => 'master/laporan/detail',
+    //     );
+    //     // dd($detail);
+    //     return view('layout/wrapper', $data);
+    // }
+    public function print($id)
     {
-        $idd = session()->get('id_desa');
-        $detail = $this->userModel->join('mod_laporan', 'mod_laporan.id_user = mod_user.id', 'left')->where('mod_laporan.id =', $id)->where('mod_laporan.id_desa =', $idd)->first();
-        $data = array(
-            'title' => 'Detail Laporan Kegiatan',
-            'data' => $detail,
-            'isi' => 'master/laporan/detail',
-        );
-        // dd($detail);
-        return view('layout/wrapper', $data);
+        $print = $this->laporanModel->where('id =', $id)->first();
+        $judul = $print['judul'];
+        $manfaat = $print['manfaat'];
+        $sasaran = $print['sasaran'];
+        $tgl = $print['tgl_kegiatan'];
+        $foto = '<img src="' . ROOTPATH . 'public/media/foto-kegiatan/' . $print['foto_kegiatan'] . '" width="300px" height="150px">';
+        // $foto = '<img src="../public_html/media/foto-kegiatan/' . $print['foto_kegiatan'] . '" width="300" height="150">';
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        //initialize document
+        $pdf->SetPrintHeader(false);
+        $pdf->SetPrintFooter(false);
+        $pdf->SetMargins(20, 15, 20, true);
+        $pdf->SetAutoPageBreak(TRUE, 2);
+        $pdf->AddPage("P", "A4");
+        $pdf->SetFont("helvetica", "", 12);
+        $this->response->setContentType('application/pdf');
+
+        //create html to pdf
+        $html = '<table width="100%" border="0" cellpadding="1">
+        <tr>
+        <td width="35%"></td>
+        <td width="2%"></td>
+        <td width="63%"></td>
+        </tr>
+        <tr>
+        <td>Judul</td>
+        <td>:</td>
+        <td>' . $judul . '</td>
+        </tr>
+        <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        </tr>
+        <tr>
+        <td>Manfaat dan Tujuan Kegiatan</td>
+        <td>:</td>
+        <td>' . $manfaat . '</td>
+        </tr>
+        <tr>
+        <td></td>
+        <td></td>
+        </tr>
+        <tr>
+        <td>Sasaran dan Capaian</td>
+        <td>:</td>
+        <td>' . $sasaran . '</td>
+        </tr>
+        <tr>
+        <td></td>
+        <td></td>
+        </tr>
+        <tr>
+        <td>Tanggal Kegiatan</td>
+        <td>:</td>
+        <td>' . format_indo($tgl) . '</td>
+        </tr>
+        <tr>
+        <td></td>
+        <td></td>
+        </tr>
+        <tr>
+        <td>Dokumentasi Kegiatan</td>
+        <td>:</td>
+        <td>' . $foto . '</td>
+        </tr>
+        <tr>
+        <td></td>
+        <td></td>
+        </tr>
+        </table>';
+        //
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $filename = "laporan-kegiatan/" . $judul . ".pdf";
+        $pdf->Output($filename, 'I');
     }
 }

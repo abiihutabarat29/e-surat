@@ -54,6 +54,7 @@
                                                             </button>
                                                             <div class="dropdown-menu" role="menu">
                                                                 <a class="dropdown-item" href="<?= base_url('laporan-kegiatan/detail/' . $r['id']) ?>">Detail</a>
+                                                                <a class="dropdown-item" href="<?= base_url('laporan-kegiatan/print/' . $r['id']) ?>">Print</a>
                                                                 <a class="dropdown-item" href="#" data-toggle='modal' data-target='#activateModalDelete<?= $r['id'] ?>'>Delete</a>
                                                             </div>
                                                         </div>

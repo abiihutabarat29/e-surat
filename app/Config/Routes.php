@@ -121,6 +121,7 @@ $routes->delete('laporan-kegiatan/(:num)', 'Laporan::delete/$1');
 $routes->get('laporan-kegiatan/edit/(:segment)', 'Laporan::edit/$1');
 $routes->add('laporan-kegiatan/update/(:segment)', 'Laporan::update/$1');
 $routes->add('laporan-kegiatan/detail/(:segment)', 'Laporan::detail/$1');
+$routes->get('laporan-kegiatan/print/(:segment)', 'Laporan::print/$1');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

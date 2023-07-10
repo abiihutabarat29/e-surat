@@ -58,11 +58,12 @@
                                                             <div class="dropdown-menu" role="menu">
                                                                 <?php if (session()->get('level') == '4') { ?>
                                                                     <a class="dropdown-item" href="<?= base_url('laporan-kegiatan/detail/' . $r['id']) ?>">Detail</a>
-                                                                    <a class="dropdown-item" href="#" data-toggle='modal' data-target='#activateModalDelete<?= $r['id'] ?>'>Delete</a>
+                                                                    <a class="dropdown-item" href="<?= base_url('laporan-kegiatan/print/' . $r['id']) ?>">Print</a>
                                                                 <?php } else { ?>
                                                                     <a class="dropdown-item" href="<?= base_url('laporan-kegiatan/detail/' . $r['id']) ?>">Detail</a>
                                                                     <?php if (session()->get('level') == '3' && $r['pokja'] == (session()->get('pokja'))) { ?>
                                                                         <a class="dropdown-item" href="<?= base_url('laporan-kegiatan/edit/' . $r['id']) ?>">Edit</a>
+                                                                        <a class="dropdown-item" href="<?= base_url('laporan-kegiatan/print/' . $r['id']) ?>">Print</a>
                                                                         <a class="dropdown-item" href="#" data-toggle='modal' data-target='#activateModalDelete<?= $r['id'] ?>'>Delete</a>
                                                                     <?php } ?>
                                                                 <?php } ?>
