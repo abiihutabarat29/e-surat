@@ -225,8 +225,13 @@ class Laporan extends BaseController
             'pokja'          => session()->get('pokja'),
         ];
         $this->laporanModel->save($data);
-        session()->setFlashdata('m', 'Data berhasil diupdate');
-        return redirect()->to(base_url('laporan-kegiatan'));
+        if (session()->get('level') == 2) {
+            session()->setFlashdata('m', 'Data berhasil dihapus');
+            return redirect()->to(base_url('data-laporan-kegiatan'));
+        } else {
+            session()->setFlashdata('m', 'Data berhasil dihapus');
+            return redirect()->to(base_url('laporan-kegiatan'));
+        }
     }
     public function detail($id)
     {
