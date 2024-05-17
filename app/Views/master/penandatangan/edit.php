@@ -36,6 +36,8 @@
                                         <option value="<?= $data['jabatan'] ?>"><?= (old('jabatan')) ? old('jabatan') : $data['jabatan'] ?></option>
                                         <option value="Ketua PKK">Ketua PKK</option>
                                         <option value="Sekretaris PKK">Sekretaris PKK</option>
+                                          <option value="Ketua Pokja">Ketua Pokja</option>
+                                        <option value="Sekretaris Pokja">Sekretaris Pokja</option>
                                     </select>
                                     <span class="error invalid-feedback"> <?= $validation->getError('jabatan'); ?></span>
                                 </div>

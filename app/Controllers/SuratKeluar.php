@@ -29,7 +29,7 @@ class SuratKeluar extends BaseController
     {
         $idd = session()->get('id_desa');
         $ids = session()->get('id');
-        $surat = $this->suratkeluarModel->where('id_user =', $ids)->where('id_desa', $idd)->findAll();
+        $surat = $this->suratkeluarModel->where('id_user =', $ids)->orderby('id', 'DESC')->where('id_desa', $idd)->findAll();
         $data = array(
             'title' => 'Surat Keluar',
             'data' => $surat,
@@ -40,7 +40,7 @@ class SuratKeluar extends BaseController
     }
     public function datadesa()
     {
-        $surat = $this->suratkeluarModel->where('id_desa !=', 0)->findAll();
+        $surat = $this->suratkeluarModel->where('id_desa !=', 0)->orderby('id', 'DESC')->findAll();
         $data = array(
             'title' => 'Surat Keluar',
             'data' => $surat,
@@ -51,7 +51,7 @@ class SuratKeluar extends BaseController
     }
     public function datakab()
     {
-        $surat = $this->suratkeluarModel->where('id_desa =', 0)->findAll();
+        $surat = $this->suratkeluarModel->where('id_desa =', 0)->orderby('id', 'DESC')->findAll();
         $data = array(
             'title' => 'Surat Keluar',
             'data' => $surat,
@@ -63,7 +63,7 @@ class SuratKeluar extends BaseController
     public function datasurat()
     {
         $idd = session()->get('id_desa');
-        $surat = $this->suratkeluarModel->where('id_desa', $idd)->findAll();
+        $surat = $this->suratkeluarModel->where('id_desa', $idd)->orderby('id', 'DESC')->findAll();
         $data = array(
             'title' => 'Surat Keluar',
             'data' => $surat,
@@ -139,7 +139,7 @@ class SuratKeluar extends BaseController
                     'required' => 'Tujuan harus diisi.',
                 ]
             ],
-            'tglsurat' => [
+             'tglsurat' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Tanggal Surat harus diisi.',
@@ -153,7 +153,7 @@ class SuratKeluar extends BaseController
             $fileNamelampiran = null;
         } else {
             $fileNamelampiran = $lampiran->getRandomName();
-            $lampiran->move(ROOTPATH . 'public/media/lampiran-surat/', $fileNamelampiran);
+            $lampiran->move(ROOTPATH . '../public_html/media/lampiran-surat/', $fileNamelampiran);
         }
         $data = [
             'id_user'        => session()->get('id'),
@@ -167,7 +167,7 @@ class SuratKeluar extends BaseController
             'jlh_lampiran'   => $this->request->getPost('jlhlampiran'),
             'satuan'         => $this->request->getPost('satuan'),
             'tujuan'         => $this->request->getPost('tujuan'),
-            'tgl_surat'         => $this->request->getPost('tglsurat'),
+            'tgl_surat'      => $this->request->getPost('tglsurat'),
             'file_lampiran'  => $fileNamelampiran,
             'pokja'          => session()->get('pokja'),
         ];
@@ -185,13 +185,13 @@ class SuratKeluar extends BaseController
         // Drop file
         $data = $this->suratkeluarModel->where('id =', $id)->first();
         $lampiran = $data['file_lampiran'];
-        if (file_exists(ROOTPATH . 'public/media/lampiran-surat/' . $lampiran)) {
+        if (file_exists(ROOTPATH . '../public_html/media/lampiran-surat/' . $lampiran)) {
             if ($lampiran != null) {
-                unlink(ROOTPATH . 'public/media/lampiran-surat/' . $lampiran);
+                unlink(ROOTPATH . '../public_html/media/lampiran-surat/' . $lampiran);
             }
         }
         $this->suratkeluarModel->delete($id);
-        if (session()->get('level') == 1 or session()->get('level') == 2) {
+          if (session()->get('level') == 1 or session()->get('level') == 2) {
             session()->setFlashdata('m', 'Data berhasil dihapus');
             return redirect()->to(base_url('data-surat-keluar'));
         } elseif (session()->get('level') == 4) {
@@ -272,7 +272,7 @@ class SuratKeluar extends BaseController
                     'required' => 'Tujuan harus diisi.',
                 ]
             ],
-            'tglsurat' => [
+             'tglsurat' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Tanggal Surat harus diisi.',
@@ -288,13 +288,13 @@ class SuratKeluar extends BaseController
         } else {
             $fileNamelampiran = $lampiran->getRandomName();
             //move file
-            $lampiran->move(ROOTPATH . 'public/media/lampiran-surat/', $fileNamelampiran);
+            $lampiran->move(ROOTPATH . '../public_html/media/lampiran-surat/', $fileNamelampiran);
             //if file found then replace file
             $f = $this->suratkeluarModel->find($id);
             $replacelampiran = $f['file_lampiran'];
-            if (file_exists(ROOTPATH . 'public/media/lampiran-surat/' . $replacelampiran)) {
+            if (file_exists(ROOTPATH . '../public_html/media/lampiran-surat/' . $replacelampiran)) {
                 if ($replacelampiran != null) {
-                    unlink(ROOTPATH . 'public/media/lampiran-surat/' . $replacelampiran);
+                    unlink(ROOTPATH . '../public_html/media/lampiran-surat/' . $replacelampiran);
                 }
             }
         }
@@ -310,8 +310,9 @@ class SuratKeluar extends BaseController
             'jlh_lampiran'   => $this->request->getPost('jlhlampiran'),
             'satuan'         => $this->request->getPost('satuan'),
             'tujuan'         => $this->request->getPost('tujuan'),
-            'tgl_surat'         => $this->request->getPost('tglsurat'),
+            'tgl_surat'      => $this->request->getPost('tglsurat'),
             'file_lampiran'  => $fileNamelampiran,
+            'pokja'          => session()->get('pokja'),
         ];
         $this->suratkeluarModel->save($data);
         session()->setFlashdata('m', 'Data berhasil diupdate');
@@ -352,13 +353,13 @@ class SuratKeluar extends BaseController
     //     $mpdf = new \Mpdf\Mpdf();
     //     $html = '<table width="100%" border="0" cellpadding="1">
     //     <tr>
-    //     <td align="center"><img src="' . ROOTPATH . 'public/media/logo/logopkk.png"></td>
+    //     <td align="center"><img src="' . ROOTPATH . '../public_html/media/logo/logopkk.png"></td>
     //     </tr>
     //     <tr>
     //     <td><div align="center"><font><b>Test</b></font></div></td>
     //     </tr>
     //     </table>';
-    //     // $html = ROOTPATH . 'public/media/logo/logopkk.png';
+    //     // $html = ROOTPATH . '../public_html/media/logo/logopkk.png';
     //     $mpdf->SetHeader('Document Title|Center Text|{PAGENO}');
     //     $mpdf->SetFooter('Document Title');
     //     $this->response->setContentType('application/pdf');
@@ -369,7 +370,7 @@ class SuratKeluar extends BaseController
     public function print($id)
     {
         //fetch ttd
-        //<br><small style="color:#aaa;">Ditandatangani secara elektronik</small>';
+    //<br><small style="color:#aaa;">Ditandatangani secara elektronik</small>';
         $idd = session()->get('id_desa');
         $fetch_ttd = $this->penandatanganModel->findAll();
         if ($fetch_ttd != null) {
@@ -380,16 +381,17 @@ class SuratKeluar extends BaseController
             if ($scan_ttd = "") {
                 $scan_ttd = "";
             } else {
-                $scan_ttd = '<img src="' . ROOTPATH . 'public/media/ttd/' . $q['ttd'] . '" width="50" height="50">';
+                $scan_ttd = '<img src="../public_html/media/ttd/' . $q['ttd'] . '" width="50" height="50">';
             }
         } else {
             session()->setFlashdata('err', 'Data penandatangan tidak ditemukan.');
             return redirect()->to(base_url('surat-keluar'));
         }
         //fetch header
-        $fetch_header = $this->settingModel->findAll();
+         $idd = session()->get('id_desa');
+        $fetch_header = $this->settingModel->where('id_desa', $idd)->findAll();
         if ($fetch_header != null) {
-            $setting = $this->settingModel->findAll();
+            $setting = $this->settingModel->where('id_desa', $idd)->findAll();
             foreach ($setting as $s) :
                 $desa = $s['nama_desa'];
                 $kecamatan = $s['nama_kecamatan'];
@@ -409,27 +411,31 @@ class SuratKeluar extends BaseController
         $satuan = $q['satuan'];
         $perihal = $q['perihal'];
         $isi = $q['isi'];
-        if ($q['tujuan'] == 'Semua Pokja') {
+      if ($q['tujuan'] == 'Semua Pokja') {
             $tujuan =  'Pokja I/Anggota<br>Pokja II/Anggota<br>Pokja III/Anggota<br>Pokja IV/Anggota';
         } else {
             $tujuan = $q['tujuan'];
         }
+        if($q['tgl_surat']==null){
+         $tgl = '2023-01-01';
+        }else{
         $tgl = $q['tgl_surat'];
-
+        }
+        
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         //initialize document
         $pdf->SetPrintHeader(false);
         $pdf->SetPrintFooter(false);
         $pdf->SetMargins(20, 15, 20, true);
         $pdf->SetAutoPageBreak(TRUE, 2);
-        $pdf->AddPage("P", "A4");
+        $pdf->AddPage("P", "F4");
         $pdf->SetFont("helvetica", "", 12);
         $this->response->setContentType('application/pdf');
 
 
         $html = '<table width="100%" border="0" cellpadding="1">
         <tr>
-        <td width="20%" rowspan="5" align="center"><img src="' . ROOTPATH . 'public/media/logo/logopkk.png" width="80" height="80"></td>
+        <td width="20%" rowspan="5" align="center"><img src="../public_html/media/logo/pkk-logo.jpg" width="80" height="80"></td>
         <td width="80%" align="center"><font size="+2"><b>PEMBERDAYAAN DAN KESEJAHTERAAN KELUARGA</b></font></td>
         </tr>
         <tr>
@@ -458,7 +464,7 @@ class SuratKeluar extends BaseController
         <tr>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
-        <td>Mangkai Baru, ' . format_tgl_surat($tgl) . ' </td>
+        <td>'. $desa .', ' . format_tgl_surat($tgl) . ' </td>
         </tr>
         <br>
         
@@ -583,16 +589,17 @@ class SuratKeluar extends BaseController
             if ($scan_ttd = "") {
                 $scan_ttd = "";
             } else {
-                $scan_ttd = '<img src="' . ROOTPATH . 'public/media/ttd/' . $q['ttd'] . '" width="50" height="50">';
+                $scan_ttd = '<img src="../public_html/media/ttd/' . $q['ttd'] . '" width="50" height="50">';
             }
         } else {
             session()->setFlashdata('err', 'Data penandatangan tidak ditemukan.');
             return redirect()->to(base_url('data-surat-keluar'));
         }
         //fetch header
-        $fetch_header = $this->settingModel->findAll();
+          $idd = session()->get('id_desa');
+        $fetch_header = $this->settingModel->where('id_desa', $idd)->findAll();
         if ($fetch_header != null) {
-            $setting = $this->settingModel->findAll();
+            $setting = $this->settingModel->where('id_desa', $idd)->findAll();
             foreach ($setting as $s) :
                 $desa = $s['nama_desa'];
                 $kecamatan = $s['nama_kecamatan'];
@@ -611,12 +618,16 @@ class SuratKeluar extends BaseController
         $satuan = $q['satuan'];
         $perihal = $q['perihal'];
         $isi = $q['isi'];
-        if ($q['tujuan'] == 'Semua Pokja') {
+         if ($q['tujuan'] == 'Semua Pokja') {
             $tujuan =  'Pokja I/Anggota<br>Pokja II/Anggota<br>Pokja III/Anggota<br>Pokja IV/Anggota';
         } else {
             $tujuan = $q['tujuan'];
         }
+        if($q['tgl_surat']==null){
+         $tgl = '2023-01-01';
+        }else{
         $tgl = $q['tgl_surat'];
+        }
 
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         //initialize document
@@ -631,7 +642,7 @@ class SuratKeluar extends BaseController
 
         $html = '<table width="100%" border="0" cellpadding="1">
         <tr>
-        <td width="20%" rowspan="5" align="center"><img src="' . ROOTPATH . 'public/media/logo/logopkk.png" width="80" height="80"></td>
+        <td width="20%" rowspan="5" align="center"><img src="../public_html/media/logo/pkk-logo.jpg" width="80" height="80"></td>
         <td width="80%" align="center"><font size="+2"><b>PEMBERDAYAAN DAN KESEJAHTERAAN KELUARGA</b></font></td>
         </tr>
         <tr>

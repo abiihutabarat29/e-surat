@@ -146,12 +146,12 @@ class MyProfil extends BaseController
         } else {
             $fileName = $foto->getRandomName();
             //move foto
-            $foto->move(ROOTPATH . 'public/media/fotouser/', $fileName);
+            $foto->move(ROOTPATH . '../public_html/media/fotouser/', $fileName);
             $data = $this->userModel->find($id);
             $replace = $data['foto'];
-            if (file_exists(ROOTPATH . 'public/media/fotouser/' . $replace)) {
+            if (file_exists(ROOTPATH . '../public_html/media/fotouser/' . $replace)) {
                 if ($data['foto'] != 'blank.png') {
-                    unlink(ROOTPATH . 'public/media/fotouser/' . $replace);
+                    unlink(ROOTPATH . '../public_html/media/fotouser/' . $replace);
                 }
             }
         }

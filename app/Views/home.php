@@ -146,7 +146,7 @@
                             <i class="fa fa-envelope-open"></i>
                         </div>
                         <?php if (session()->get('level') == '1') { ?>
-                            <a href="<?= base_url('data-surat-keluar') ?>" class="small-box-footer">Selengkapnya<i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="<?= base_url('surat-keluar') ?>" class="small-box-footer">Selengkapnya<i class="fas fa-arrow-circle-right"></i></a>
                         <?php } else { ?>
                             <a href="#" class="small-box-footer">Surat Keluar</a>
                         <?php } ?>
@@ -162,7 +162,7 @@
                             <i class="fa fa-envelope-open"></i>
                         </div>
                         <?php if (session()->get('level') == '1') { ?>
-                            <a href="<?= base_url('data-surat-keluar') ?>" class="small-box-footer">Selengkapnya<i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="<?= base_url('surat-keluar') ?>" class="small-box-footer">Selengkapnya<i class="fas fa-arrow-circle-right"></i></a>
                         <?php } else { ?>
                             <a href="#" class="small-box-footer">Surat Keluar</a>
                         <?php } ?>
@@ -178,7 +178,7 @@
                             <i class="fa fa-envelope-open"></i>
                         </div>
                         <?php if (session()->get('level') == '1') { ?>
-                            <a href="<?= base_url('data-surat-keluar') ?>" class="small-box-footer">Selengkapnya<i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="<?= base_url('surat-keluar') ?>" class="small-box-footer">Selengkapnya<i class="fas fa-arrow-circle-right"></i></a>
                         <?php } else { ?>
                             <a href="#" class="small-box-footer">Surat Keluar</a>
                         <?php } ?>
@@ -194,7 +194,7 @@
                             <i class="fa fa-envelope-open"></i>
                         </div>
                         <?php if (session()->get('level') == '1') { ?>
-                            <a href="<?= base_url('data-surat-keluar') ?>" class="small-box-footer">Selengkapnya<i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="<?= base_url('surat-keluar') ?>" class="small-box-footer">Selengkapnya<i class="fas fa-arrow-circle-right"></i></a>
                         <?php } else { ?>
                             <a href="#" class="small-box-footer">Surat Keluar</a>
                         <?php } ?>
@@ -210,7 +210,7 @@
                             <i class="fa fa-envelope-open"></i>
                         </div>
                         <?php if (session()->get('level') == '1') { ?>
-                            <a href="<?= base_url('data-surat-keluar') ?>" class="small-box-footer">Selengkapnya<i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="<?= base_url('surat-keluar') ?>" class="small-box-footer">Selengkapnya<i class="fas fa-arrow-circle-right"></i></a>
                         <?php } else { ?>
                             <a href="#" class="small-box-footer">Surat Keluar</a>
                         <?php } ?>

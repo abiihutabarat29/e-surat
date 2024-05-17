@@ -93,7 +93,7 @@
                                 <li class="nav-item">
                                     <a href="<?= base_url('user') ?>" class="nav-link <?= ($request->uri->getSegment(1) == 'user') ? 'active' : ""; ?>">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>User PKK Kabupaten</p>
+                                        <p>User Kabupaten</p>
                                     </a>
                                 </li>
                             </ul>
@@ -103,7 +103,7 @@
                                 <li class="nav-item">
                                     <a href="<?= base_url('data-user') ?>" class="nav-link <?= ($request->uri->getSegment(1) == 'data-user') ? 'active' : ""; ?>">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>User PKK Desa</p>
+                                        <p>User PKK</p>
                                     </a>
                                 </li>
                             </ul>
@@ -218,15 +218,17 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <?php if (session()->get('level') == '3') { ?>
+                            <?php if (session()->get('level') == '3' or session()->get('level') == '2') { ?>
                                 <a href="<?= base_url('tambah-laporan-kegiatan') ?>" class="nav-link <?= ($request->uri->getSegment(1) == 'tambah-laporan-kegiatan') ? 'active' : ""; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Tambah Laporan</p>
                                 </a>
+                                <?php if (session()->get('level') == '3') { ?>
                                 <a href="<?= base_url('laporan-kegiatan') ?>" class="nav-link <?= ($request->uri->getSegment(1) == 'laporan-kegiatan') ? 'active' : ""; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Daftar Laporan</p>
                                 </a>
+                            <?php } ?>
                             <?php } ?>
                             <?php if (session()->get('level') == '1' or session()->get('level') == '2') { ?>
                                 <a href="<?= base_url('data-laporan-kegiatan') ?>" class="nav-link <?= ($request->uri->getSegment(1) == 'data-laporan-kegiatan') ? 'active' : ""; ?>">

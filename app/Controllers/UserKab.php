@@ -122,9 +122,9 @@ class UserKab extends BaseController
     {
         $data = $this->userModel->find($id);
         $foto = $data['foto'];
-        if (file_exists(ROOTPATH . 'public/media/fotouser/' . $foto)) {
+        if (file_exists(ROOTPATH . '../public_html/media/fotouser/' . $foto)) {
             if ($data['foto'] != 'blank.png') {
-                unlink(ROOTPATH . 'public/media/fotouser/' . $foto);
+                unlink(ROOTPATH . '../public_html/media/fotouser/' . $foto);
             }
         }
         $this->userModel->delete($id);
@@ -350,9 +350,9 @@ class UserKab extends BaseController
     {
         $data = $this->userModel->find($id);
         $foto = $data['foto'];
-        if (file_exists(ROOTPATH . 'public/media/fotouser/' . $foto)) {
+        if (file_exists(ROOTPATH . '../public_html/media/fotouser/' . $foto)) {
             if ($data['foto'] != 'blank.png') {
-                unlink(ROOTPATH . 'public/media/fotouser/' . $foto);
+                unlink(ROOTPATH . '../public_html/media/fotouser/' . $foto);
             }
         }
         $this->userModel->delete($id);

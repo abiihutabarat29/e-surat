@@ -64,7 +64,7 @@
                                     </select>
                                     <span class="error invalid-feedback"> <?= $validation->getError('level'); ?></span>
                                 </div>
-                                <div id="view" style="display:none;">
+                                  <div id="view" style="display:none;">
                                     <div class="form-group">
                                         <label>Pokja</label>
                                         <select name="pokja" class="form-control">
@@ -72,10 +72,10 @@
                                             <option value="Pokja I" <?= $data['pokja'] == 'Pokja I' ? 'selected' : ''; ?>>Pokja I</option>
                                             <option value="Pokja II" <?= $data['pokja'] == 'Pokja II' ? 'selected' : ''; ?>>Pokja II</option>
                                             <option value="Pokja III" <?= $data['pokja'] == 'Pokja III' ? 'selected' : ''; ?>>Pokja III</option>
-                                            <option value="Pokja III" <?= $data['pokja'] == 'Pokja IV' ? 'selected' : ''; ?>>Pokja IV</option>
+                                            <option value="Pokja IIV" <?= $data['pokja'] == 'Pokja IV' ? 'selected' : ''; ?>>Pokja IV</option>
                                         </select>
                                     </div>
-                                </div>
+                                    </div>
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-info">Update</button>

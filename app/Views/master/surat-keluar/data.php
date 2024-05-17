@@ -15,7 +15,6 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="swal" data-swal="<?= session()->getFlashdata('m'); ?>"></div>
-                        <div class="swalErr" data-swal="<?= session()->getFlashdata('err'); ?>"></div>
                         <?php if (session()->get('level') == '3' or session()->get('level') == '2') { ?>
                             <div class="card-header">
                                 <a href="<?= base_url('tambah-surat-keluar') ?>" class="btn btn-info btn-xs">
@@ -60,7 +59,7 @@
                                                             <?php if (session()->get('level') == '4') { ?>
                                                                 <a class="dropdown-item" href="<?= base_url('surat-keluar/detail/' . $r['id']) ?>">Detail</a>
                                                                 <a class="dropdown-item" href="<?= base_url('surat-keluar-kabupaten/print/' . $r['id']) ?>" target="_blank">Print</a>
-                                                                <a class="dropdown-item" href="#" data-toggle='modal' data-target='#activateModalDeleteSk<?= $r['id'] ?>'>Delete</a>
+                                                                 <a class="dropdown-item" href="#" data-toggle='modal' data-target='#activateModalDeleteSk<?= $r['id'] ?>'>Delete</a>
                                                             <?php } else { ?>
                                                                 <a class="dropdown-item" href="<?= base_url('surat-keluar/detail/' . $r['id']) ?>">Detail</a>
                                                                 <a class="dropdown-item" href="<?= base_url('surat-keluar/print/' . $r['id']) ?>" target="_blank">Print</a>

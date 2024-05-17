@@ -56,7 +56,7 @@
                                                                 <span class="sr-only">Toggle Dropdown</span>
                                                             </button>
                                                             <div class="dropdown-menu" role="menu">
-                                                                <?php if (session()->get('level') == '4') { ?>
+                                                             <?php if (session()->get('level') == '4') { ?>
                                                                     <a class="dropdown-item" href="<?= base_url('laporan-kegiatan/detail/' . $r['id']) ?>">Detail</a>
                                                                     <a class="dropdown-item" href="<?= base_url('laporan-kegiatan/print/' . $r['id']) ?>">Print</a>
                                                                 <?php } else { ?>

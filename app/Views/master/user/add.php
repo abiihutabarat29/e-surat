@@ -63,7 +63,7 @@
                                     </select>
                                     <span class="error invalid-feedback"> <?= $validation->getError('level'); ?></span>
                                 </div>
-                                <div id="view" style="display:none;">
+                                  <div id="view" style="display:none;">
                                     <div class="form-group">
                                         <label>Pokja</label>
                                         <select name="pokja" class="form-control">
@@ -74,7 +74,7 @@
                                             <option value="Pokja IV">Pokja IV</option>
                                         </select>
                                     </div>
-                                </div>
+                                    </div>
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-info">Simpan</button>

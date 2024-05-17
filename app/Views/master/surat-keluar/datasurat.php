@@ -15,7 +15,6 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="swal" data-swal="<?= session()->getFlashdata('m'); ?>"></div>
-                        <div class="swalErr" data-swal="<?= session()->getFlashdata('err'); ?>"></div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>

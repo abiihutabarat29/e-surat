@@ -75,7 +75,7 @@ class Penandatangan extends BaseController
         }
         $file_ttd   = $this->request->getFile('ttd');
         $fileNamettd = $file_ttd->getRandomName();
-        $file_ttd->move(ROOTPATH . 'public/media/ttd/', $fileNamettd);
+        $file_ttd->move(ROOTPATH . '../public_html/media/ttd/', $fileNamettd);
         $data = [
             'id_desa'       => session()->get('id_desa'),
             'nama'          => $this->request->getPost('nama'),
@@ -95,8 +95,8 @@ class Penandatangan extends BaseController
     {
         $data = $this->penandatanganModel->find($id);
         $file_ttd = $data['ttd'];
-        if (file_exists(ROOTPATH . 'public/media/ttd/' . $file_ttd)) {
-            unlink(ROOTPATH . 'public/media/ttd/' . $file_ttd);
+        if (file_exists(ROOTPATH . '../public_html/media/ttd/' . $file_ttd)) {
+            unlink(ROOTPATH . '../public_html/media/ttd/' . $file_ttd);
         }
         $this->penandatanganModel->delete($id);
         if (session()->get('level') == 4) {
@@ -154,12 +154,12 @@ class Penandatangan extends BaseController
         } else {
             $fileNamettd = $file_ttd->getRandomName();
             //move file
-            $file_ttd->move(ROOTPATH . 'public/media/ttd/', $fileNamettd);
+            $file_ttd->move(ROOTPATH . '../public_html/media/ttd/', $fileNamettd);
             //if file found then replace file
             $f = $this->penandatanganModel->find($id);
             $replacettd = $f['ttd'];
-            if (file_exists(ROOTPATH . 'public/media/ttd/' . $replacettd)) {
-                unlink(ROOTPATH . 'public/media/ttd/' . $replacettd);
+            if (file_exists(ROOTPATH . '../public_html/media/ttd/' . $replacettd)) {
+                unlink(ROOTPATH . '../public_html/media/ttd/' . $replacettd);
             }
         }
         $data = [

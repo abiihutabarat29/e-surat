@@ -37,7 +37,7 @@ class Home extends BaseController
                 'pokjaII'       => $this->suratmasukModel->where('pokja =', 'Pokja II')->where('id_desa', $idd)->countAllResults(),
                 'pokjaIII'      => $this->suratmasukModel->where('pokja =', 'Pokja III')->where('id_desa', $idd)->countAllResults(),
                 'pokjaIV'       => $this->suratmasukModel->where('pokja =', 'Pokja IV')->where('id_desa', $idd)->countAllResults(),
-                'penandatangan'       => $this->penandatanganModel->where('id_desa', $idd)->countAllResults(),
+                  'penandatangan'       => $this->penandatanganModel->where('id_desa', $idd)->countAllResults(),
                 'sekretariatsk'   => $this->suratkeluarModel->where('pokja =', null)->where('id_desa', $idd)->countAllResults(),
                 'pokjaIsk'        => $this->suratkeluarModel->where('pokja =', 'Pokja I')->where('id_desa', $idd)->countAllResults(),
                 'pokjaIIsk'       => $this->suratkeluarModel->where('pokja =', 'Pokja II')->where('id_desa', $idd)->countAllResults(),

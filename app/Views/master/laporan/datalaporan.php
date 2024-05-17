@@ -44,7 +44,15 @@
                                                     <?php } ?>
                                                 </center>
                                             </td>
-                                            <td><?= $r['pokja']; ?></td>
+                                             <td>
+                                                <center>
+                                                    <?php if ($r['pokja'] != null) { ?>
+                                                        <?= $r['pokja']; ?>
+                                                    <?php } else { ?>
+                                                        Sekretariat
+                                                    <?php } ?>
+                                                </center>
+                                            </td>
                                             <td>
                                                 <div class="form-button-action">
                                                     <center>
@@ -53,7 +61,7 @@
                                                                 <span class="sr-only">Toggle Dropdown</span>
                                                             </button>
                                                             <div class="dropdown-menu" role="menu">
-                                                                <a class="dropdown-item" href="<?= base_url('laporan-kegiatan/detail/' . $r['id']) ?>">Detail</a>
+                                                                  <a class="dropdown-item" href="<?= base_url('laporan-kegiatan/detail/' . $r['id']) ?>">Detail</a>
                                                                 <?php if (session()->get('level') == '2' && $r['pokja'] == (session()->get('pokja'))) { ?>
                                                                     <a class="dropdown-item" href="<?= base_url('laporan-kegiatan/edit/' . $r['id']) ?>">Edit</a>
                                                                 <?php } ?>

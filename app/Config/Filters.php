@@ -114,6 +114,8 @@ class Filters extends BaseConfig
                 'my-profil',
                 'my-profil/*',
                 'laporan-kegiatan/*',
+                'tambah-laporan-kegiatan',
+                'tambah-laporan-kegiatan/*',
                 'data-laporan-kegiatan',
             ]],
             'filteruser' => ['except' => [

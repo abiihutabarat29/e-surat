@@ -20,7 +20,7 @@ class SuratMasuk extends BaseController
     public function data()
     {
         $idd = session()->get('id_desa');
-        $surat = $this->suratmasukModel->where('id_desa', $idd)->findAll();
+        $surat = $this->suratmasukModel->where('id_desa', $idd)->orderby('id', 'DESC')->findAll();
         $data = array(
             'title' => 'Surat Masuk',
             'data' => $surat,
@@ -31,7 +31,7 @@ class SuratMasuk extends BaseController
     }
     public function datadesa()
     {
-        $surat = $this->suratmasukModel->where('id_desa !=', 0)->findAll();
+        $surat = $this->suratmasukModel->where('id_desa !=', 0)->orderby('id', 'DESC')->findAll();
         $data = array(
             'title' => 'Surat Masuk',
             'data' => $surat,
@@ -42,7 +42,7 @@ class SuratMasuk extends BaseController
     }
     public function datakab()
     {
-        $surat = $this->suratmasukModel->where('id_desa =', 0)->findAll();
+        $surat = $this->suratmasukModel->where('id_desa =', 0)->orderby('id', 'DESC')->findAll();
         $data = array(
             'title' => 'Surat Masuk',
             'data' => $surat,
@@ -121,10 +121,10 @@ class SuratMasuk extends BaseController
             $fileNamelampiran = null;
         } else {
             $fileNamelampiran = $lampiran->getRandomName();
-            $lampiran->move(ROOTPATH . 'public/media/lampiran/', $fileNamelampiran);
+            $lampiran->move(ROOTPATH . '../public_html/media/lampiran/', $fileNamelampiran);
         }
         $fileNamesurat = $surat->getRandomName();
-        $surat->move(ROOTPATH . 'public/media/surat-masuk/', $fileNamesurat);
+        $surat->move(ROOTPATH . '../public_html/media/surat-masuk/', $fileNamesurat);
         $data = [
             'id_user'        => session()->get('id'),
             'id_desa'        => session()->get('id_desa'),
@@ -148,12 +148,12 @@ class SuratMasuk extends BaseController
         $data = $this->suratmasukModel->where('id =', $id)->first();
         $surat = $data['file'];
         $lampiran = $data['lampiran'];
-        if (file_exists(ROOTPATH . 'public/media/surat-masuk/' . $surat)) {
-            unlink(ROOTPATH . 'public/media/surat-masuk/' . $surat);
+        if (file_exists(ROOTPATH . '../public_html/media/surat-masuk/' . $surat)) {
+            unlink(ROOTPATH . '../public_html/media/surat-masuk/' . $surat);
         }
-        if (file_exists(ROOTPATH . 'public/media/lampiran/' . $lampiran)) {
+        if (file_exists(ROOTPATH . '../public_html/media/lampiran/' . $lampiran)) {
             if ($lampiran != null) {
-                unlink(ROOTPATH . 'public/media/lampiran/' . $lampiran);
+                unlink(ROOTPATH . '../public_html/media/lampiran/' . $lampiran);
             }
         }
         $this->suratmasukModel->delete($id);
@@ -240,12 +240,12 @@ class SuratMasuk extends BaseController
         } else {
             $fileNamesurat = $surat->getRandomName();
             //move file
-            $surat->move(ROOTPATH . 'public/media/surat-masuk/', $fileNamesurat);
+            $surat->move(ROOTPATH . '../public_html/media/surat-masuk/', $fileNamesurat);
             //if file found then replace file
             $f = $this->suratmasukModel->find($id);
             $replacesurat = $f['file'];
-            if (file_exists(ROOTPATH . 'public/media/surat-masuk/' . $replacesurat)) {
-                unlink(ROOTPATH . 'public/media/surat-masuk/' . $replacesurat);
+            if (file_exists(ROOTPATH . '../public_html/media/surat-masuk/' . $replacesurat)) {
+                unlink(ROOTPATH . '../public_html/media/surat-masuk/' . $replacesurat);
             }
         }
         if ($lampiran->getError() == 4) {
@@ -254,13 +254,13 @@ class SuratMasuk extends BaseController
         } else {
             $fileNamelampiran = $lampiran->getRandomName();
             //move file
-            $lampiran->move(ROOTPATH . 'public/media/lampiran/', $fileNamelampiran);
+            $lampiran->move(ROOTPATH . '../public_html/media/lampiran/', $fileNamelampiran);
             //if file found then replace file
             $f = $this->suratmasukModel->find($id);
             $replacelampiran = $f['lampiran'];
-            if (file_exists(ROOTPATH . 'public/media/lampiran/' . $replacelampiran)) {
+            if (file_exists(ROOTPATH . '../public_html/media/lampiran/' . $replacelampiran)) {
                 if ($replacelampiran != null) {
-                    unlink(ROOTPATH . 'public/media/lampiran/' . $replacelampiran);
+                    unlink(ROOTPATH . '../public_html/media/lampiran/' . $replacelampiran);
                 }
             }
         }
@@ -274,6 +274,7 @@ class SuratMasuk extends BaseController
             'asal_surat'     => $this->request->getPost('asal'),
             'file'           => $fileNamesurat,
             'lampiran'       => $fileNamelampiran,
+            'pokja'          => session()->get('pokja'),
         ];
         $this->suratmasukModel->save($data);
         session()->setFlashdata('m', 'Data berhasil diupdate');

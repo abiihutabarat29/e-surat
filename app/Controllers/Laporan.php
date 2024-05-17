@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\laporanModel;
+use App\Models\LaporanModel;
 use App\Models\UserModel;
 use CodeIgniter\Config\Config;
 use TCPDF;
@@ -76,10 +76,9 @@ class Laporan extends BaseController
         //Validasi input
         if (!$this->validate([
             'judul' => [
-                'rules' => 'required|alpha_space',
+                'rules' => 'required',
                 'errors' => [
                     'required' => 'Judul tidak boleh kosong.',
-                    'alpha_space' => 'Judul harus huruf dan spasi.'
                 ]
             ],
             'manfaat' => [
@@ -114,7 +113,7 @@ class Laporan extends BaseController
         }
         $file_foto   = $this->request->getFile('foto');
         $fileNamefoto = $file_foto->getRandomName();
-        $file_foto->move(ROOTPATH . 'public/media/foto-kegiatan/', $fileNamefoto);
+        $file_foto->move(ROOTPATH . '../public_html/media/foto-kegiatan/', $fileNamefoto);
         $data = [
             'id_user'       => session()->get('id'),
             'id_desa'       => session()->get('id_desa'),
@@ -127,17 +126,21 @@ class Laporan extends BaseController
         ];
         $this->laporanModel->save($data);
         session()->setFlashdata('m', 'Data berhasil disimpan');
+            if (session()->get('level') == '2') {
+            return redirect()->to(base_url('data-laporan-kegiatan'));
+        } else {
         return redirect()->to(base_url('laporan-kegiatan'));
+        }
     }
     public function delete($id)
     {
         $data = $this->laporanModel->find($id);
         $file_foto = $data['foto_kegiatan'];
-        if (file_exists(ROOTPATH . 'public/media/foto-kegiatan/' . $file_foto)) {
-            unlink(ROOTPATH . 'public/media/foto-kegiatan/' . $file_foto);
+        if (file_exists(ROOTPATH . '../public_html/media/foto-kegiatan/' . $file_foto)) {
+            unlink(ROOTPATH . '../public_html/media/foto-kegiatan/' . $file_foto);
         }
         $this->laporanModel->delete($id);
-        if (session()->get('level') == 1) {
+        if (session()->get('level') == 1 or session()->get('level') == 2) {
             session()->setFlashdata('m', 'Data berhasil dihapus');
             return redirect()->to(base_url('data-laporan-kegiatan'));
         } else {
@@ -163,10 +166,9 @@ class Laporan extends BaseController
         //Validasi input
         if (!$this->validate([
             'judul' => [
-                'rules' => 'required|alpha_space',
+                'rules' => 'required',
                 'errors' => [
                     'required' => 'Judul tidak boleh kosong.',
-                    'alpha_space' => 'Judul harus huruf dan spasi.'
                 ]
             ],
             'manfaat' => [
@@ -205,12 +207,12 @@ class Laporan extends BaseController
         } else {
             $fileNamefoto = $file_foto->getRandomName();
             //move file
-            $file_foto->move(ROOTPATH . 'public/media/foto-kegiatan/', $fileNamefoto);
+            $file_foto->move(ROOTPATH . '../public_html/media/foto-kegiatan/', $fileNamefoto);
             //if file found then replace file
             $f = $this->laporanModel->find($id);
             $replacefoto = $f['foto_kegiatan'];
-            if (file_exists(ROOTPATH . 'public/media/foto-kegiatan/' . $replacefoto)) {
-                unlink(ROOTPATH . 'public/media/foto-kegiatan/' . $replacefoto);
+            if (file_exists(ROOTPATH . '../public_html/media/foto-kegiatan/' . $replacefoto)) {
+                unlink(ROOTPATH . '../public_html/media/foto-kegiatan/' . $replacefoto);
             }
         }
         $data = [
@@ -244,27 +246,27 @@ class Laporan extends BaseController
         // dd($detail);
         return view('layout/wrapper', $data);
     }
-    // public function details($id)
-    // {
-    //     $idd = session()->get('id_desa');
-    //     $detail = $this->userModel->join('mod_laporan', 'mod_laporan.id_user = mod_user.id', 'left')->where('mod_laporan.id =', $id)->where('mod_laporan.id_desa =', $idd)->first();
-    //     $data = array(
-    //         'title' => 'Detail Laporan Kegiatan',
-    //         'data' => $detail,
-    //         'isi' => 'master/laporan/detail',
-    //     );
-    //     // dd($detail);
-    //     return view('layout/wrapper', $data);
-    // }
-    public function print($id)
+    public function details($id)
+    {
+        $idd = session()->get('id_desa');
+        $detail = $this->userModel->join('mod_laporan', 'mod_laporan.id_user = mod_user.id', 'left')->where('mod_laporan.id =', $id)->where('mod_laporan.id_desa =', $idd)->first();
+        $data = array(
+            'title' => 'Detail Laporan Kegiatan',
+            'data' => $detail,
+            'isi' => 'master/laporan/detail',
+        );
+        // dd($detail);
+        return view('layout/wrapper', $data);
+    }
+      public function print($id)
     {
         $print = $this->laporanModel->where('id =', $id)->first();
         $judul = $print['judul'];
         $manfaat = $print['manfaat'];
         $sasaran = $print['sasaran'];
         $tgl = $print['tgl_kegiatan'];
-        $foto = '<img src="' . ROOTPATH . 'public/media/foto-kegiatan/' . $print['foto_kegiatan'] . '" width="300px" height="150px">';
-        // $foto = '<img src="../public_html/media/foto-kegiatan/' . $print['foto_kegiatan'] . '" width="300" height="150">';
+        // $foto = '<img src="' . ROOTPATH . 'public/media/foto-kegiatan/' . $print['foto_kegiatan'] . '" width="300px" height="150px">';
+        $foto = '<img src="../public_html/media/foto-kegiatan/' . $print['foto_kegiatan'] . '" width="300" height="150">';
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         //initialize document
         $pdf->SetPrintHeader(false);
